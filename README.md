@@ -1,10 +1,14 @@
 # fastapi-celery-imports
 
+[![ci](https://github.com/msalimcengiz/fastapi-celery-imports/actions/workflows/ci.yml/badge.svg)](https://github.com/msalimcengiz/fastapi-celery-imports/actions/workflows/ci.yml)
+
 Bulk catalog import for a marketplace. Sellers upload CSV files with tens of thousands of products, prices and stock levels. The stack is **FastAPI**, **Celery 5.6 on RabbitMQ quorum queues**, **PostgreSQL** and Redis (for chord results).
 
 Files are split into chunks that are validated and upserted in parallel. Invalid rows are reported with their exact line number. The seller is notified with a signed webhook.
 
 The focus is the part that is hard to get right: background jobs that are neither **lost nor applied twice** when workers die, the broker restarts, or tasks are retried.
+
+![`make demo` on a fresh machine: every step is checked and prints ✓ or stops with ✗](docs/demo.svg)
 
 ## Try it in 2 minutes
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1016" viewBox="0 0 960 1016" role="img" aria-label="fastapi-celery-imports · make demo">
+<title>fastapi-celery-imports · make demo</title>
+<style>text{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#d6deeb;white-space:pre}.b{font-weight:700;fill:#ffffff}.d{fill:#8b949e}.g{fill:#3fb950}.r{fill:#f85149}.p{fill:#79c0ff}.l{opacity:0;animation-duration:18.77s;animation-iteration-count:infinite;animation-timing-function:step-end}@keyframes k0{0%{opacity:0}2.131%{opacity:1}99.5%{opacity:0}}@keyframes k1{0%{opacity:0}2.131%{opacity:1}99.5%{opacity:0}}@keyframes k2{0%{opacity:0}7.459%{opacity:1}99.5%{opacity:0}}@keyframes k3{0%{opacity:0}8.098%{opacity:1}99.5%{opacity:0}}@keyframes k4{0%{opacity:0}8.737%{opacity:1}99.5%{opacity:0}}@keyframes k5{0%{opacity:0}9.377%{opacity:1}99.5%{opacity:0}}@keyframes k6{0%{opacity:0}12.094%{opacity:1}99.5%{opacity:0}}@keyframes k7{0%{opacity:0}12.733%{opacity:1}99.5%{opacity:0}}@keyframes k8{0%{opacity:0}13.372%{opacity:1}99.5%{opacity:0}}@keyframes k9{0%{opacity:0}14.012%{opacity:1}99.5%{opacity:0}}@keyframes k10{0%{opacity:0}14.651%{opacity:1}99.5%{opacity:0}}@keyframes k11{0%{opacity:0}15.290%{opacity:1}99.5%{opacity:0}}@keyframes k12{0%{opacity:0}15.930%{opacity:1}99.5%{opacity:0}}@keyframes k13{0%{opacity:0}16.569%{opacity:1}99.5%{opacity:0}}@keyframes k14{0%{opacity:0}17.208%{opacity:1}99.5%{opacity:0}}@keyframes k15{0%{opacity:0}17.848%{opacity:1}99.5%{opacity:0}}@keyframes k16{0%{opacity:0}18.487%{opacity:1}99.5%{opacity:0}}@keyframes k17{0%{opacity:0}19.126%{opacity:1}99.5%{opacity:0}}@keyframes k18{0%{opacity:0}19.766%{opacity:1}99.5%{opacity:0}}@keyframes k19{0%{opacity:0}20.405%{opacity:1}99.5%{opacity:0}}@keyframes k20{0%{opacity:0}21.044%{opacity:1}99.5%{opacity:0}}@keyframes k21{0%{opacity:0}21.684%{opacity:1}99.5%{opacity:0}}@keyframes k22{0%{opacity:0}22.323%{opacity:1}99.5%{opacity:0}}@keyframes k23{0%{opacity:0}22.962%{opacity:1}99.5%{opacity:0}}@keyframes k24{0%{opacity:0}23.601%{opacity:1}99.5%{opacity:0}}@keyframes k25{0%{opacity:0}24.241%{opacity:1}99.5%{opacity:0}}@keyframes k26{0%{opacity:0}26.159%{opacity:1}99.5%{opacity:0}}@keyframes k27{0%{opacity:0}26.798%{opacity:1}99.5%{opacity:0}}@keyframes k28{0%{opacity:0}32.126%{opacity:1}99.5%{opacity:0}}@keyframes k29{0%{opacity:0}32.765%{opacity:1}99.5%{opacity:0}}@keyframes k30{0%{opacity:0}34.843%{opacity:1}99.5%{opacity:0}}@keyframes k31{0%{opacity:0}35.482%{opacity:1}99.5%{opacity:0}}@keyframes k32{0%{opacity:0}36.441%{opacity:1}99.5%{opacity:0}}@keyframes k33{0%{opacity:0}38.679%{opacity:1}99.5%{opacity:0}}@keyframes k34{0%{opacity:0}39.318%{opacity:1}99.5%{opacity:0}}@keyframes k35{0%{opacity:0}42.195%{opacity:1}99.5%{opacity:0}}@keyframes k36{0%{opacity:0}47.523%{opacity:1}99.5%{opacity:0}}@keyframes k37{0%{opacity:0}48.162%{opacity:1}99.5%{opacity:0}}@keyframes k38{0%{opacity:0}53.490%{opacity:1}99.5%{opacity:0}}@keyframes k39{0%{opacity:0}54.129%{opacity:1}99.5%{opacity:0}}@keyframes k40{0%{opacity:0}56.260%{opacity:1}99.5%{opacity:0}}@keyframes k41{0%{opacity:0}56.899%{opacity:1}99.5%{opacity:0}}@keyframes k42{0%{opacity:0}58.391%{opacity:1}99.5%{opacity:0}}@keyframes k43{0%{opacity:0}59.030%{opacity:1}99.5%{opacity:0}}@keyframes k44{0%{opacity:0}64.358%{opacity:1}99.5%{opacity:0}}@keyframes k45{0%{opacity:0}64.997%{opacity:1}99.5%{opacity:0}}@keyframes k46{0%{opacity:0}65.637%{opacity:1}99.5%{opacity:0}}@keyframes k47{0%{opacity:0}66.276%{opacity:1}99.5%{opacity:0}}@keyframes k48{0%{opacity:0}66.915%{opacity:1}99.5%{opacity:0}}@keyframes k49{0%{opacity:0}68.780%{opacity:1}99.5%{opacity:0}}@keyframes k50{0%{opacity:0}69.419%{opacity:1}99.5%{opacity:0}}@keyframes k51{0%{opacity:0}70.059%{opacity:1}99.5%{opacity:0}}@keyframes k52{0%{opacity:0}70.698%{opacity:1}99.5%{opacity:0}}</style>
+<rect width="960" height="1016" rx="8" fill="#0d1117"/>
+<rect width="960" height="30" rx="8" fill="#161b22"/><rect y="22" width="960" height="8" fill="#161b22"/>
+<circle cx="18" cy="15" r="6" fill="#ff5f57"/><circle cx="38" cy="15" r="6" fill="#febc2e"/><circle cx="58" cy="15" r="6" fill="#28c840"/>
+<text x="480.0" y="20" text-anchor="middle" style="fill:#8b949e;font-size:12px">fastapi-celery-imports · make demo</text>
+<text class="l" style="animation-name:k0" x="16" y="60"><tspan class="p">$</tspan> make demo</text>
+<text class="l" style="animation-name:k1" x="16" y="78">Starting the stack (API, 2 import workers, webhook worker, beat, RabbitMQ, Postgres, Redis)…</text>
+<text class="l" style="animation-name:k2" x="16" y="96"></text>
+<text class="l" style="animation-name:k3" x="16" y="114"><tspan class="b">1. A 5,000-row CSV with Turkish decimal commas and 1% bad rows is imported in parallel chunks</tspan></text>
+<text class="l" style="animation-name:k4" x="16" y="132">   <tspan class="d">→ 202 {&quot;id&quot;: &quot;72b3a7d4-1526-41fb-b32e-2fcb3509c3d0&quot;, &quot;status&quot;: &quot;QUEUED&quot;, &quot;progress_pct&quot;: 0.0, &quot;total_rows&quot;: null, …</tspan></text>
+<text class="l" style="animation-name:k5" x="16" y="150">   <tspan class="g">✓</tspan> 202: stored, then enqueued after the commit</text>
+<text class="l" style="animation-name:k6" x="16" y="168">   <tspan class="d">status COMPLETED_WITH_ERRORS · 4950 imported · 50 rejected · progress 100.0%</tspan></text>
+<text class="l" style="animation-name:k7" x="16" y="186">   <tspan class="g">✓</tspan> 4,950 rows imported, 50 rejected</text>
+<text class="l" style="animation-name:k8" x="16" y="204"></text>
+<text class="l" style="animation-name:k9" x="16" y="222"><tspan class="b">2. Every rejected row is reported with its line number in the original file and the reason</tspan></text>
+<text class="l" style="animation-name:k10" x="16" y="240">   <tspan class="d">line,sku,error</tspan></text>
+<text class="l" style="animation-name:k11" x="16" y="258">   <tspan class="d">9,DEMO-7,&quot;price: Input should be a valid decimal&quot;</tspan></text>
+<text class="l" style="animation-name:k12" x="16" y="276">   <tspan class="d">109,DEMO-107,&quot;price: Input should be a valid decimal&quot;</tspan></text>
+<text class="l" style="animation-name:k13" x="16" y="294">   <tspan class="g">✓</tspan> line 9 of the file is DEMO-7 (header is line 1)</text>
+<text class="l" style="animation-name:k14" x="16" y="312"></text>
+<text class="l" style="animation-name:k15" x="16" y="330"><tspan class="b">3. The seller&#x27;s endpoint got a signed webhook</tspan></text>
+<text class="l" style="animation-name:k16" x="16" y="348">   <tspan class="d">delivery 4a098259… body: {&#x27;id&#x27;: &#x27;72b3a7d4-1526-41fb-b32e-2fcb3509c3d0&#x27;, &#x27;status&#x27;: &#x27;COMPLETED_WITH_ERRORS&#x27;, &#x27;total_…</tspan></text>
+<text class="l" style="animation-name:k17" x="16" y="366">   <tspan class="g">✓</tspan> HMAC-SHA256 signature verified by the receiver</text>
+<text class="l" style="animation-name:k18" x="16" y="384"></text>
+<text class="l" style="animation-name:k19" x="16" y="402"><tspan class="b">4. The same Idempotency-Key returns the same import; reusing it for a different file is refused</tspan></text>
+<text class="l" style="animation-name:k20" x="16" y="420">   <tspan class="g">✓</tspan> 200 with the original import</text>
+<text class="l" style="animation-name:k21" x="16" y="438">   <tspan class="g">✓</tspan> 409: same key, different file content</text>
+<text class="l" style="animation-name:k22" x="16" y="456"></text>
+<text class="l" style="animation-name:k23" x="16" y="474"><tspan class="b">5. Sellers cannot see each other&#x27;s imports</tspan></text>
+<text class="l" style="animation-name:k24" x="16" y="492">   <tspan class="g">✓</tspan> 404 for another seller (same as missing)</text>
+<text class="l" style="animation-name:k25" x="16" y="510">   <tspan class="g">✓</tspan> 401 without an API key</text>
+<text class="l" style="animation-name:k26" x="16" y="528"></text>
+<text class="l" style="animation-name:k27" x="16" y="546"><tspan class="b">6. The seller&#x27;s endpoint is down (503 twice): the webhook is retried with jittered backoff</tspan></text>
+<text class="l" style="animation-name:k28" x="16" y="564">   <tspan class="d">receiver answers: [503, 503, 200]</tspan></text>
+<text class="l" style="animation-name:k29" x="16" y="582">   <tspan class="g">✓</tspan> delivered on attempt 3, all attempts carry the same X-Delivery-Id</text>
+<text class="l" style="animation-name:k30" x="16" y="600"></text>
+<text class="l" style="animation-name:k31" x="16" y="618"><tspan class="b">7. A 200,000-row import is uploaded, and the import workers are SIGKILLed while it runs</tspan></text>
+<text class="l" style="animation-name:k32" x="16" y="636">   <tspan class="g">✓</tspan> 202 Accepted</text>
+<text class="l" style="animation-name:k33" x="16" y="654">   <tspan class="d">progress when the workers are killed: 0.5% (990 rows done)</tspan></text>
+<text class="l" style="animation-name:k34" x="16" y="672">   <tspan class="g">✓</tspan> the import is mid-flight</text>
+<text class="l" style="animation-name:k35" x="16" y="690">   <tspan class="d">killed every import worker with SIGKILL; restarting them</tspan></text>
+<text class="l" style="animation-name:k36" x="16" y="708"></text>
+<text class="l" style="animation-name:k37" x="16" y="726"><tspan class="b">8. Unacknowledged chunks were redelivered to the restarted workers; every number adds up</tspan></text>
+<text class="l" style="animation-name:k38" x="16" y="744">   <tspan class="d">198000 imported + 2000 rejected of 200000</tspan></text>
+<text class="l" style="animation-name:k39" x="16" y="762">   <tspan class="g">✓</tspan> exactly 198,000 + 2,000: no chunk lost, none applied twice</text>
+<text class="l" style="animation-name:k40" x="16" y="780"></text>
+<text class="l" style="animation-name:k41" x="16" y="798"><tspan class="b">9. A running import can be cancelled; remaining chunks are skipped</tspan></text>
+<text class="l" style="animation-name:k42" x="16" y="816">   <tspan class="d">→ 200 {&quot;id&quot;: &quot;5683e9a9-8a18-467c-bb32-3a2ff822b13b&quot;, &quot;status&quot;: &quot;CANCELLED&quot;, &quot;progress_pct&quot;: 0.0, &quot;total_rows&quot;: 100…</tspan></text>
+<text class="l" style="animation-name:k43" x="16" y="834">   <tspan class="g">✓</tspan> cancel accepted (409 only if it had already finished)</text>
+<text class="l" style="animation-name:k44" x="16" y="852">   <tspan class="g">✓</tspan> status CANCELLED; its queued chunk tasks are skipped as they drain</text>
+<text class="l" style="animation-name:k45" x="16" y="870"></text>
+<text class="l" style="animation-name:k46" x="16" y="888"><tspan class="b g">Demo finished: chunked parallel import, line-accurate errors, signed webhooks with retries, idempotency, isolation, w…</tspan></text>
+<text class="l" style="animation-name:k47" x="16" y="906"></text>
+<text class="l" style="animation-name:k48" x="16" y="924"><tspan class="d">Celery queues in RabbitMQ (all quorum):</tspan></text>
+<text class="l" style="animation-name:k49" x="16" y="942">   default	quorum	0</text>
+<text class="l" style="animation-name:k50" x="16" y="960">   imports	quorum	0</text>
+<text class="l" style="animation-name:k51" x="16" y="978">   webhooks	quorum	0</text>
+<text class="l" style="animation-name:k52" x="16" y="996">Explore: API docs http://localhost:8001/docs · RabbitMQ http://localhost:15673 (imports/imports) · stop → make down</text>
+</svg>
