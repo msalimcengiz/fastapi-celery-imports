@@ -1,0 +1,101 @@
+name: imports
+
+x-app: &app
+  build: { context: ., target: prod }
+  image: catalog-import
+  restart: unless-stopped
+  environment: &env
+    DATABASE_URL: postgresql+psycopg://imports:imports@postgres:5432/imports
+    BROKER_URL: amqp://imports:imports@rabbitmq:5672//
+    RESULT_BACKEND: redis://redis:6379/0
+    API_KEYS: ${API_KEYS:-dev-key:seller-1,other-key:seller-2}
+    WEBHOOK_SECRET: ${WEBHOOK_SECRET:-dev-webhook-secret}
+    CHUNK_ROWS: ${CHUNK_ROWS:-1000}
+    STUCK_AFTER_SECONDS: ${STUCK_AFTER_SECONDS:-120}
+    FAULT_RATE: ${FAULT_RATE:-0}
+  depends_on:
+    migrate: { condition: service_completed_successfully }
+    rabbitmq: { condition: service_healthy }
+    redis: { condition: service_healthy }
+
+services:
+  migrate:
+    build: { context: ., target: prod }
+    image: catalog-import
+    command: ["alembic", "upgrade", "head"]
+    environment: *env
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  api:
+    <<: *app
+    ports: ["8001:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/readyz')"]
+      interval: 3s
+      retries: 20
+
+  # Chunk processing: CPU and database bound, one slot per core.
+  worker-imports:
+    <<: *app
+    command: ["celery", "-A", "catalog_import.celery_app", "worker", "-Q", "imports", "-c", "4", "-n", "imports@%h",
+              "--loglevel", "INFO"]
+    environment: { <<: *env, METRICS_PORT: "9100" }
+    deploy: { replicas: 2 }
+    stop_grace_period: 60s
+
+  # Outbound HTTP: mostly waiting, so more slots, and isolated from the import workers.
+  worker-webhooks:
+    <<: *app
+    command: ["celery", "-A", "catalog_import.celery_app", "worker", "-Q", "webhooks,default", "-c", "8",
+              "-n", "webhooks@%h", "--loglevel", "INFO"]
+    environment: { <<: *env, METRICS_PORT: "9100" }
+
+  # Exactly one scheduler: it triggers the stuck-import sweeper and cleanup.
+  beat:
+    <<: *app
+    command: ["celery", "-A", "catalog_import.celery_app", "beat", "--loglevel", "INFO", "-s", "/tmp/celerybeat-schedule"]
+
+  # Stand-in for a seller's webhook endpoint (verifies signatures). Used by `make demo`.
+  webhook-receiver:
+    image: python:3.13-alpine
+    command: ["python", "-u", "/demo/receiver.py"]
+    environment:
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-dev-webhook-secret}
+    volumes: ["./demo:/demo:ro"]
+    ports: ["9000:9000"]
+
+  postgres:
+    image: postgres:17-alpine
+    environment: { POSTGRES_USER: imports, POSTGRES_PASSWORD: imports, POSTGRES_DB: imports }
+    ports: ["5437:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U imports"]
+      interval: 2s
+      retries: 30
+
+  rabbitmq:
+    image: rabbitmq:4.1-management-alpine
+    environment: { RABBITMQ_DEFAULT_USER: imports, RABBITMQ_DEFAULT_PASS: imports }
+    ports: ["5673:5672", "15673:15672"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+      interval: 5s
+      retries: 30
+
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6380:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      retries: 30
+
+  # Queue depth, task rates and latencies for every queue and task, as Prometheus metrics.
+  celery-exporter:
+    image: danihodovic/celery-exporter:latest
+    profiles: ["observability"]
+    environment:
+      CE_BROKER_URL: amqp://imports:imports@rabbitmq:5672//
+    ports: ["9808:9808"]

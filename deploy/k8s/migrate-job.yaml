@@ -1,0 +1,19 @@
+# Run before rolling out a new version (for example as an Argo CD / Helm pre-sync hook).
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: catalog-import-migrate
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: migrate
+          image: ghcr.io/msalimcengiz/fastapi-celery-imports
+          command: ["alembic", "upgrade", "head"]
+          envFrom:
+            - configMapRef: { name: catalog-import }
+            - secretRef: { name: catalog-import }
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }

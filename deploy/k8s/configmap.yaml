@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-import
+data:
+  CHUNK_ROWS: "1000"
+  STUCK_AFTER_SECONDS: "120"
+  WEBHOOK_MAX_ATTEMPTS: "10"
+# DATABASE_URL, BROKER_URL, RESULT_BACKEND, API_KEYS and WEBHOOK_SECRET come from the
+# "catalog-import" Secret.

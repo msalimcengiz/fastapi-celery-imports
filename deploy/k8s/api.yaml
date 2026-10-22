@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-import-api
+  labels: { app: catalog-import, role: api }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: catalog-import, role: api }
+  strategy:
+    rollingUpdate: { maxUnavailable: 0, maxSurge: 1 }
+  template:
+    metadata:
+      labels: { app: catalog-import, role: api }
+    spec:
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: api
+          image: ghcr.io/msalimcengiz/fastapi-celery-imports
+          ports: [{ name: http, containerPort: 8000 }]
+          envFrom:
+            - configMapRef: { name: catalog-import }
+            - secretRef: { name: catalog-import }
+          resources:
+            requests: { cpu: 250m, memory: 256Mi }
+            limits: { memory: 768Mi }  # uploads up to 50 MB are held in memory
+          readinessProbe:
+            httpGet: { path: /readyz, port: http }
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            periodSeconds: 15
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-import-api
+spec:
+  selector: { app: catalog-import, role: api }
+  ports: [{ name: http, port: 80, targetPort: http }]
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalog-import-api
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: catalog-import-api }
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource: { name: cpu, target: { type: Utilization, averageUtilization: 70 } }

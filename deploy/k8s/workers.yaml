@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-import-worker-imports
+  labels: { app: catalog-import, role: worker-imports }
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: catalog-import, role: worker-imports }
+  template:
+    metadata:
+      labels: { app: catalog-import, role: worker-imports }
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9100"
+    spec:
+      # Celery finishes the current task on SIGTERM (warm shutdown). Tasks are acks_late,
+      # so anything still running when the grace period ends is redelivered.
+      terminationGracePeriodSeconds: 300
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: worker
+          image: ghcr.io/msalimcengiz/fastapi-celery-imports
+          command: ["celery", "-A", "catalog_import.celery_app", "worker", "-Q", "imports", "-c", "4", "--loglevel", "INFO"]
+          env:
+            - { name: METRICS_PORT, value: "9100" }
+          envFrom:
+            - configMapRef: { name: catalog-import }
+            - secretRef: { name: catalog-import }
+          ports: [{ name: metrics, containerPort: 9100 }]
+          resources:
+            requests: { cpu: 1, memory: 512Mi }
+            limits: { memory: 1Gi }
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-import-worker-webhooks
+  labels: { app: catalog-import, role: worker-webhooks }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: catalog-import, role: worker-webhooks }
+  template:
+    metadata:
+      labels: { app: catalog-import, role: worker-webhooks }
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9100"
+    spec:
+      # Celery finishes the current task on SIGTERM (warm shutdown). Tasks are acks_late,
+      # so anything still running when the grace period ends is redelivered.
+      terminationGracePeriodSeconds: 300
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: worker
+          image: ghcr.io/msalimcengiz/fastapi-celery-imports
+          command: ["celery", "-A", "catalog_import.celery_app", "worker", "-Q", "webhooks,default", "-c", "8", "--loglevel", "INFO"]
+          env:
+            - { name: METRICS_PORT, value: "9100" }
+          envFrom:
+            - configMapRef: { name: catalog-import }
+            - secretRef: { name: catalog-import }
+          ports: [{ name: metrics, containerPort: 9100 }]
+          resources:
+            requests: { cpu: 200m, memory: 256Mi }
+            limits: { memory: 1Gi }
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-import-beat
+  labels: { app: catalog-import, role: beat }
+spec:
+  # Exactly one scheduler. Recreate (not RollingUpdate) so two never overlap during a deploy.
+  replicas: 1
+  strategy: { type: Recreate }
+  selector:
+    matchLabels: { app: catalog-import, role: beat }
+  template:
+    metadata:
+      labels: { app: catalog-import, role: beat }
+    spec:
+      securityContext: { runAsNonRoot: true, runAsUser: 10001, seccompProfile: { type: RuntimeDefault } }
+      containers:
+        - name: beat
+          image: ghcr.io/msalimcengiz/fastapi-celery-imports
+          command: ["celery", "-A", "catalog_import.celery_app", "beat", "-s", "/tmp/celerybeat-schedule"]
+          envFrom:
+            - configMapRef: { name: catalog-import }
+            - secretRef: { name: catalog-import }
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { memory: 256Mi }
+          securityContext: { allowPrivilegeEscalation: false, capabilities: { drop: ["ALL"] } }

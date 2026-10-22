@@ -1,0 +1,45 @@
+# Example requests for the VS Code "REST Client" extension or JetBrains HTTP Client.
+# Start first: make up. Interactive API docs: http://localhost:8001/docs
+@base = http://localhost:8001/v1
+@key = dev-key
+
+### Upload a CSV (multipart). Columns: sku,name,price,currency,stock[,barcode]
+POST {{base}}/imports
+Authorization: Bearer {{key}}
+Idempotency-Key: feed-2026-10-22
+Content-Type: multipart/form-data; boundary=demo
+
+--demo
+Content-Disposition: form-data; name="file"; filename="products.csv"
+Content-Type: text/csv
+
+sku,name,price,currency,stock
+ABC-1,Çay Bardağı 6'lı,"129,90",TRY,40
+ABC-2,Kahve Fincanı,not-a-price,TRY,10
+ABC-3,Termos 1L,449.00,TRY,0
+--demo
+Content-Disposition: form-data; name="callback_url"
+
+http://webhook-receiver:9000/hooks
+--demo--
+
+### Status and progress (replace the id)
+GET {{base}}/imports/REPLACE-WITH-IMPORT-ID
+Authorization: Bearer {{key}}
+
+### Rejected rows with their line numbers
+GET {{base}}/imports/REPLACE-WITH-IMPORT-ID/errors.csv
+Authorization: Bearer {{key}}
+
+### Cancel a running import
+POST {{base}}/imports/REPLACE-WITH-IMPORT-ID/cancel
+Authorization: Bearer {{key}}
+
+### Webhooks the demo receiver got (signature checked)
+GET http://localhost:9000/received
+
+### Make the receiver answer 503 to the next 2 deliveries
+POST http://localhost:9000/control
+Content-Type: application/json
+
+{"fail": 2}
